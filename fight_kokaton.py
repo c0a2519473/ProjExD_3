@@ -153,7 +153,10 @@ class Score:
         
 
     def update(self,screen: pg.Surface):
-        self.img = self.fonto.render(str(self.score),0,(0,0,255))
+        """
+        引数：変数のscreenを呼び出す目的
+        """
+        self.img = self.fonto.render(self.score,0,(0,0,255))
         screen.blit(self.img, self.rct)
         
         
@@ -163,18 +166,16 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bird = Bird((300, 200))
+    score=Score()
     # bomb = Bomb((255, 0, 0), 10)
     bombs = [Bomb((255, 0, 0), 10) for _ in range(NUM_OF_BOMBS)]
     # for i in range(NUM_OF_BOMBS):
     #     bomb = Bomb((255, 0, 0), 10)
     #     bombs.appned(bomb)
-    score=Score()
     beam = None  # ゲーム初期化時にはビームは存在しない
     clock = pg.time.Clock()
     tmr = 0
-    
-    
-    
+
     
     while True:
         
@@ -209,7 +210,6 @@ def main():
                     # time.sleep(1)
         
         bombs = [bomb for bomb in bombs if bomb is not None]
-        
         
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
